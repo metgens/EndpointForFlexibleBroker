@@ -9,15 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\BrokerClients\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\EventHubMock\EventHubMock.csproj" />
     <ProjectReference Include="..\G.EndpointForFelxibleBroker.Shared\G.EndpointForFelxibleBroker.Shared.csproj" />
   </ItemGroup>
 

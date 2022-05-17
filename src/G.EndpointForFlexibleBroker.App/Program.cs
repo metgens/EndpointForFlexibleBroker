@@ -1,6 +1,20 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using G.EndpointForFlexibleBroker.App.Infrastructure;
+using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
+using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerPayloadSerializers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterType<BrokerClientFactory>().As<IBrokerClientFactory>();
+    builder.RegisterType<AzureEventHubClient>().Keyed<IBrokerClient>(BrokerClientType.AzureEventHub);
+    builder.RegisterType<BrokerJsonMessageSerializer>().As<IBrokerMessageSerializer>();
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

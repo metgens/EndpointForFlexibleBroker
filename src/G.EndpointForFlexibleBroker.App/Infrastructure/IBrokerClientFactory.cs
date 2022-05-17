@@ -1,4 +1,6 @@
-﻿namespace G.EndpointForFlexibleBroker.App.Infrastructure
+﻿using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
+
+namespace G.EndpointForFlexibleBroker.App.Infrastructure
 {
     public interface IBrokerClientFactory
     {

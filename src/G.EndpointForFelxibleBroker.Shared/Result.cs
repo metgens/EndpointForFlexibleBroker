@@ -48,6 +48,10 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure
         {
         }
 
+        public ErrorResult(Exception ex) : this(ex.ToString(), Array.Empty<Error>())
+        {
+        }
+
         public ErrorResult(string message, IReadOnlyCollection<Error> errors)
         {
             Message = message;
@@ -62,6 +66,10 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure
     public class ErrorResult<T> : Result<T>, IErrorResult
     {
         public ErrorResult(string message) : this(message, Array.Empty<Error>())
+        {
+        }
+
+        public ErrorResult(Exception ex) : this(ex.ToString(), Array.Empty<Error>())
         {
         }
 
@@ -99,9 +107,9 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure
         IReadOnlyCollection<Error> Errors { get; }
     }
 
-    public class NotFoundResult : Error
+    public class NotFoundResult<T> : ErrorResult<T>
     {
-        public NotFoundResult(string propertyName, string details) : base(null, details)
+        public NotFoundResult(string propertyName, string message) : base(message)
         {
             PropertyName = propertyName;
         }
