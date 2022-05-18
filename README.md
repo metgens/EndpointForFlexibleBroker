@@ -62,9 +62,9 @@ The new client should:
 # Tests
 
 - Integration tests
-  - [src\G.EndpointForFlexibleBroker.IntegrationTests](src\G.EndpointForFlexibleBroker.IntegrationTests)
+  - [src/G.EndpointForFlexibleBroker.IntegrationTests](src/G.EndpointForFlexibleBroker.IntegrationTests)
 - Unit tests
-  - [src\G.EndpointForFlexibleBroker.UnitTests](src\G.EndpointForFlexibleBroker.UnitTests) 
+  - [src/G.EndpointForFlexibleBroker.UnitTests](src/G.EndpointForFlexibleBroker.UnitTests) 
 
 Type the following commands to run tests in docker:
 
