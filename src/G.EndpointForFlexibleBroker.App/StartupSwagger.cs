@@ -19,7 +19,7 @@ namespace G.EndpointForFlexibleBroker.App
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 //shared
-                xmlFilename = $"{Assembly.GetAssembly(typeof(VehicleInspectionDto)).GetName().Name}.xml";
+                xmlFilename = $"{Assembly.GetAssembly(typeof(VehicleInspectionDto))?.GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
             });

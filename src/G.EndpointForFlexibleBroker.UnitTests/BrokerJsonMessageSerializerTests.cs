@@ -1,4 +1,4 @@
-﻿using AutoMoq;
+﻿using AutoFixture;
 using FluentAssertions;
 using G.EndpointForFlexibleBroker.Shared.DTOs;
 using Xunit;
@@ -11,7 +11,7 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure.BrokerPayloadSerializer
 
         public BrokerJsonMessageSerializerTests()
         {
-            var mocker = new AutoMoqer();
+            var mocker = new Fixture();
             _target = mocker.Create<BrokerJsonMessageSerializer>();
         }
 
