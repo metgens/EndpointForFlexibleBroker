@@ -1,11 +1,11 @@
 ﻿using G.EndpointForFlexibleBroker.Shared.DTOs;
-using G.EndpointForFlexibleBroker.App.Infrastructure;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerPayloadSerializers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using G.EndpointForFlexibleBroker.Shared;
 
 namespace G.EndpointForFlexibleBroker.App.Controllers
 {
@@ -14,15 +14,12 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
     //[Authorize] 
     public class VehicleInspectionController : ControllerBase
     {
-        private readonly IBrokerClientFactory _brokerClientFactory;
-        private readonly IBrokerMessageSerializer _brokerMessageSerializer;
-        private readonly ILogger<VehicleInspectionController> _logger;
 
-        public VehicleInspectionController(IBrokerClientFactory brokerClientFactory, IBrokerMessageSerializer brokerMessageSerializer, ILogger<VehicleInspectionController> logger)
+        private readonly IBrokerPublisher _brokerPublisher;
+
+        public VehicleInspectionController(IBrokerPublisher brokerPublisher)
         {
-            _brokerClientFactory = brokerClientFactory;
-            _brokerMessageSerializer = brokerMessageSerializer;
-            _logger = logger;
+            _brokerPublisher = brokerPublisher;
         }
 
         /// <summary>
@@ -40,31 +37,17 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var resultBrokerFactory = _brokerClientFactory.Get(vehicleInspection.BrokerName);
-            if (resultBrokerFactory.Failure)
+            var result = await _brokerPublisher.SendAsync(vehicleInspection);
+            if (result.Failure)
             {
-                return resultBrokerFactory switch
+                return result switch
                 {
                     NotFoundResult<IBrokerClient> errResult => StatusCode((int)StatusCodes.Status405MethodNotAllowed, errResult.Message),
                     ErrorResult<IBrokerClient> errResult => StatusCode((int)StatusCodes.Status500InternalServerError, errResult.Message),
                     _ => StatusCode((int)HttpStatusCode.InternalServerError)
                 };
             }
-
-            var brokerClient = resultBrokerFactory.Data;
-
-            var message = _brokerMessageSerializer.Serialize(vehicleInspection);
-
-            var resultSend = await brokerClient.SendAsync(message.payload, message.properties);
-            if (resultSend.Failure)
-            {
-                return resultBrokerFactory switch
-                {
-                    ErrorResult<IBrokerClient> errResult => StatusCode((int)StatusCodes.Status500InternalServerError, errResult.Message),
-                    _ => StatusCode((int)HttpStatusCode.InternalServerError)
-                };
-            }
-
+                       
             return Accepted();
         }
     }

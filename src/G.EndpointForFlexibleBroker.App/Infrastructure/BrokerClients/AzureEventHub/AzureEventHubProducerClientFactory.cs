@@ -1,4 +1,5 @@
 ﻿using EventHubMock;
+using G.EndpointForFlexibleBroker.Shared;
 using System.Collections.Concurrent;
 
 namespace G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients.AzureEventHub

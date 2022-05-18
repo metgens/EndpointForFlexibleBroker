@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace G.EndpointForFlexibleBroker.App.Infrastructure
+namespace G.EndpointForFlexibleBroker.Shared
 {
-    /// <see cref="https://josef.codes/my-take-on-the-result-class-in-c-sharp/"/>
+    /// <summary>
+    /// Result of operation
+    /// ref: https://josef.codes/my-take-on-the-result-class-in-c-sharp/
+    /// </summary>
     public abstract class Result
     {
         public bool Success { get; protected set; }
@@ -36,6 +39,8 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure
 
     public class SuccessResult<T> : Result<T>
     {
+
+
         public SuccessResult(T data) : base(data)
         {
             Success = true;

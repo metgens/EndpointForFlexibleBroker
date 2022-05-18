@@ -12,8 +12,9 @@ namespace G.EndpointForFlexibleBroker.App
         {
             builder.Host.ConfigureContainer((Action<ContainerBuilder>)(autofacBuilder =>
             {
+                autofacBuilder.RegisterType<BrokerPublisher>().As<IBrokerPublisher>();
                 autofacBuilder.RegisterType<BrokerClientFactory>().As<IBrokerClientFactory>();
-                autofacBuilder.RegisterType<AzureEventHubProducerClientFactory>().As<IAzureEventHubProducerClientFactory>().SingleInstance();
+                autofacBuilder.RegisterType<AzureEventHubProducerClientFactory>().As<IAzureEventHubProducerClientFactory>().SingleInstance(); //to reuse eventhub client and avoid closing and opening connection
                 autofacBuilder.RegisterType<AzureEventHubClient>().Keyed<IBrokerClient>(BrokerClientType.AzureEventHub);
                 autofacBuilder.RegisterType<BrokerJsonMessageSerializer>().As<IBrokerMessageSerializer>();
             }));

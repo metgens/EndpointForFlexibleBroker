@@ -1,5 +1,6 @@
 ﻿using Autofac.Features.Indexed;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
+using G.EndpointForFlexibleBroker.Shared;
 
 namespace G.EndpointForFlexibleBroker.App.Infrastructure
 {
