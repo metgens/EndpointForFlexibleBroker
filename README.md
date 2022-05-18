@@ -4,15 +4,23 @@ Application is an REST API service that act as a gateway to ingest a lot of data
 
 # How to start the solution?
 
-Type the following command:
+Type the following command to run solution locally:
 ```
 cd src\G.EndpointForFlexibleBroker.App
 dotnet run
 ```
 
+Type the following commands to run solution from docker image:
+```
+cd src
+docker build -f .\Dockerfile -t endpoint-flexible-api:latest .
+
+docker run -p 8080:80 endpoint-flexible-api:latest -it bash
+```
+
 # API Documentation
 
-Application provides API documentation as a Swagger page. The page is available at: `[page url]/swagger/index.html`.
+Application provides API documentation as a Swagger page. The page is available at: `[page url]/swagger/index.html` for example [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html).
 
 # Architecture decisions records - ADR
 
@@ -50,3 +58,19 @@ The new client should:
 - implement the `IBrokerClient` interface,
 - be added to `BrokerClientType` enum
 - and registered in IoC container using keyed registration where enum value is the key. Registration takes place in `StartupIoC` class.
+
+# Tests
+
+- Integration tests
+  - [src\G.EndpointForFlexibleBroker.IntegrationTests](src\G.EndpointForFlexibleBroker.IntegrationTests)
+- Unit tests
+  - [src\G.EndpointForFlexibleBroker.UnitTests](src\G.EndpointForFlexibleBroker.UnitTests) 
+
+Type the following commands to run tests in docker:
+
+```
+cd src
+docker build -f .\Dockerfile.Tests -t endpoint-flexible-tests:latest .
+
+docker run endpoint-flexible-tests:latest
+```
