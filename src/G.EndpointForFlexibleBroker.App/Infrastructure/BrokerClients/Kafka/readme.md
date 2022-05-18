@@ -1,0 +1,1 @@
+﻿There is no Kafka client implemented ;) I Only want to show structure of directories for different brokers' clients.

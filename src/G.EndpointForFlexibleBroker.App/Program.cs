@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using G.EndpointForFlexibleBroker.App.Infrastructure;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
+using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients.AzureEventHub;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerPayloadSerializers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterType<BrokerClientFactory>().As<IBrokerClientFactory>();
+    builder.RegisterType<AzureEventHubProducerClientFactory>().As<IAzureEventHubProducerClientFactory>().SingleInstance();
     builder.RegisterType<AzureEventHubClient>().Keyed<IBrokerClient>(BrokerClientType.AzureEventHub);
     builder.RegisterType<BrokerJsonMessageSerializer>().As<IBrokerMessageSerializer>();
 });
@@ -37,3 +39,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
