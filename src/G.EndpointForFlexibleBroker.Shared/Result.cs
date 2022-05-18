@@ -5,7 +5,7 @@ namespace G.EndpointForFlexibleBroker.Shared
 {
     /// <summary>
     /// Result of operation
-    /// ref: https://josef.codes/my-take-on-the-result-class-in-c-sharp/
+    /// based on ref: https://josef.codes/my-take-on-the-result-class-in-c-sharp/
     /// </summary>
     public abstract class Result
     {
@@ -66,6 +66,11 @@ namespace G.EndpointForFlexibleBroker.Shared
 
         public string Message { get; }
         public IReadOnlyCollection<Error> Errors { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ErrorResult)}: {Message} {string.Join(";", Errors)}";
+        }
     }
 
     public class ErrorResult<T> : Result<T>, IErrorResult
@@ -87,6 +92,11 @@ namespace G.EndpointForFlexibleBroker.Shared
 
         public string Message { get; set; }
         public IReadOnlyCollection<Error> Errors { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ErrorResult<T>)}: {Message} {string.Join(";", Errors)}";
+        }
     }
 
     public class Error
@@ -104,6 +114,11 @@ namespace G.EndpointForFlexibleBroker.Shared
 
         public string Code { get; }
         public string Details { get; }
+
+        public override string ToString()
+        {
+            return $"{Code}:{Details}";
+        }
     }
 
     internal interface IErrorResult
@@ -120,5 +135,10 @@ namespace G.EndpointForFlexibleBroker.Shared
         }
 
         public string PropertyName { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(NotFoundResult<T>)}({PropertyName}): {Message} {string.Join(";", Errors)}";
+        }
     }
 }

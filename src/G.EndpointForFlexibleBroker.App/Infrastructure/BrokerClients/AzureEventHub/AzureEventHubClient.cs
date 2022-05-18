@@ -35,7 +35,7 @@ namespace G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients.AzureEven
         public async Task<Result> SendAsync(byte[] payload, Dictionary<string, object>? userProperties = null, CancellationToken cancellationToken = default)
         {
             if (_producerClient == null)
-                return new ErrorResult($"'{nameof(AzureEventHubClient)}' has not beed configured.");
+                return new ErrorResult($"'{nameof(AzureEventHubClient)}' has not beed configured. Run 'Configure' method first.");
 
             var eventsBatch = PrepareEventBatch(payload, userProperties);
 

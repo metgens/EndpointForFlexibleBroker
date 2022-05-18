@@ -16,10 +16,12 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
     {
 
         private readonly IBrokerPublisher _brokerPublisher;
+        private readonly ILogger<VehicleInspectionController> _logger;
 
-        public VehicleInspectionController(IBrokerPublisher brokerPublisher)
+        public VehicleInspectionController(IBrokerPublisher brokerPublisher, ILogger<VehicleInspectionController> logger)
         {
             _brokerPublisher = brokerPublisher;
+            _logger = logger;
         }
 
         /// <summary>
@@ -40,6 +42,8 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
             var result = await _brokerPublisher.SendAsync(vehicleInspection);
             if (result.Failure)
             {
+                _logger.LogError(result.ToString());
+
                 return result switch
                 {
                     NotFoundResult<IBrokerClient> errResult => StatusCode((int)StatusCodes.Status405MethodNotAllowed, errResult.Message),
