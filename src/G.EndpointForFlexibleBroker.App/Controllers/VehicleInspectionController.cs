@@ -25,6 +25,11 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Endpoint for vehicle inspection messages
+        /// </summary>
+        /// <param name="vehicleInspection">Vehicle inspection message</param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

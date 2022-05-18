@@ -8,12 +8,24 @@ namespace G.EndpointForFelxibleBroker.Shared.DTOs
     /// </summary>
     public class VehicleInspectionDto : IEntityWithBrokerDeclaration
     {
+        /// <summary>
+        /// Destination broker name.
+        /// </summary>
         [Required]
         public string BrokerName { get; }
+        /// <summary>
+        /// Car plate number readed after visual inspection
+        /// </summary>
         [Required]
         public string PlateNumber { get; }
+        /// <summary>
+        /// Location Id, where the inspection takes place
+        /// </summary>
         [Range(1, uint.MaxValue)]
         public uint LocationId { get; }
+        /// <summary>
+        /// Epoch time of inspection in miliseconds
+        /// </summary>
         [Range(1, ulong.MaxValue)]
         public ulong EpochTimeMs { get; }
 
