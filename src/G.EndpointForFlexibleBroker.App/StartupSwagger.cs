@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using G.EndpointForFelxibleBroker.Shared.DTOs;
+using G.EndpointForFlexibleBroker.Shared.DTOs;
 using G.EndpointForFlexibleBroker.App.Infrastructure;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients.AzureEventHub;

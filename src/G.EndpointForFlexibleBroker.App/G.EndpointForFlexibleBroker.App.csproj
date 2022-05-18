@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventHubMock\EventHubMock.csproj" />
-    <ProjectReference Include="..\G.EndpointForFelxibleBroker.Shared\G.EndpointForFelxibleBroker.Shared.csproj" />
+    <ProjectReference Include="..\G.EndpointForFlexibleBroker.Shared\G.EndpointForFlexibleBroker.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using G.EndpointForFelxibleBroker.Shared.DTOs;
+using G.EndpointForFlexibleBroker.Shared.DTOs;
 using G.EndpointForFlexibleBroker.App.Infrastructure.BrokerClients;
 using System.Text;
 using System.Text.Json;

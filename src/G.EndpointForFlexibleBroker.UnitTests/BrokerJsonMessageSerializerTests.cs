@@ -1,6 +1,6 @@
 ﻿using AutoMoq;
 using FluentAssertions;
-using G.EndpointForFelxibleBroker.Shared.DTOs;
+using G.EndpointForFlexibleBroker.Shared.DTOs;
 using Xunit;
 
 namespace G.EndpointForFlexibleBroker.App.Infrastructure.BrokerPayloadSerializers

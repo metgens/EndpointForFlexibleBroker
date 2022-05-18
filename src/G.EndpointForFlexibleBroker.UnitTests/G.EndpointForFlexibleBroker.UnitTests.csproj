@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\G.EndpointForFelxibleBroker.Shared\G.EndpointForFelxibleBroker.Shared.csproj" />
+    <ProjectReference Include="..\G.EndpointForFlexibleBroker.Shared\G.EndpointForFlexibleBroker.Shared.csproj" />
     <ProjectReference Include="..\G.EndpointForFlexibleBroker.App\G.EndpointForFlexibleBroker.App.csproj" />
   </ItemGroup>
 

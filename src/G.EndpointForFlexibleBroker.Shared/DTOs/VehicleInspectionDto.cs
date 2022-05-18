@@ -1,7 +1,7 @@
-﻿using G.EndpointForFelxibleBroker.Shared.Interfaces;
+﻿using G.EndpointForFlexibleBroker.Shared.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace G.EndpointForFelxibleBroker.Shared.DTOs
+namespace G.EndpointForFlexibleBroker.Shared.DTOs
 {
     /// <summary>
     /// Results of visual inspection of cars in specified locations

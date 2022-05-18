@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace G.EndpointForFelxibleBroker.Shared.Interfaces
+namespace G.EndpointForFlexibleBroker.Shared.Interfaces
 {
     public interface IEntityWithBrokerDeclaration
     {
