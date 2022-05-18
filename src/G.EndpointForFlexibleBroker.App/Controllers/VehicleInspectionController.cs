@@ -27,10 +27,14 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status405MethodNotAllowed)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> ReceiveVehicleInspection(VehicleInspectionDto vehicleInspection)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var resultBrokerFactory = _brokerClientFactory.Get(vehicleInspection.BrokerName);
             if (resultBrokerFactory.Failure)
             {
@@ -45,7 +49,7 @@ namespace G.EndpointForFlexibleBroker.App.Controllers
             var brokerClient = resultBrokerFactory.Data;
 
             var message = _brokerMessageSerializer.Serialize(vehicleInspection);
-            
+
             var resultSend = await brokerClient.SendAsync(message.payload, message.properties);
             if (resultSend.Failure)
             {
